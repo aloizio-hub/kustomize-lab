@@ -8,5 +8,5 @@ replicas:
   count: 3
 
 resources:
-  - "../../../overlay"
+  - "../../../base"
   - namespace.yml

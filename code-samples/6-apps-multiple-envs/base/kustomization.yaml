@@ -25,5 +25,5 @@ resources:
 - paymentservice
 - productcatalogservice
 - recommendationservice
-- redis
+- redisservice
 - shippingservice

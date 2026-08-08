@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  version: techtalk-resources
+
+namePrefix: techtalk-resources-
+
+resources:
+- mysql
+- https://github.com/aloizio-hub/kustomize-lab/tree/main/code-samples/3-the-kfile/wordpress/kustomize/base

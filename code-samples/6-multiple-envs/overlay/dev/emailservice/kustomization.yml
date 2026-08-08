@@ -7,4 +7,4 @@ configMapGenerator:
       - env.properties
 
 resources:
-  - "../../../base3/emailservice"
+  - "../../../overlay/emailservice"

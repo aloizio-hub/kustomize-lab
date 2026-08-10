@@ -4,7 +4,28 @@ kind: Kustomization
 commonLabels:
   version: v1
 
-namePrefix: v1-
+# namePrefix: v1-convenience-
+
+
 
 resources:
 - ../base
+
+# transformers:
+# - ./transformers/name-prefix.yml
+
+
+
+# transformers:
+# - |-
+#   apiVersion: builtin
+#   kind: PrefixSuffixTransformer
+#   metadata:
+#     name: my-prefix-transformer
+#   prefix: v1-inline-
+#   ## suffix: -transformers
+#   fieldSpecs:
+#   - path: metadata/name
+
+
+# nameSuffix: -transformers

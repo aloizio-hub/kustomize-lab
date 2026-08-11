@@ -5,12 +5,25 @@ configMapGenerator:
   - name: mysql-config
     envs:
       - mysql-config.properties
+#     # options:
+#     #   disableNameSuffixHash: true
 
-# generatorOptions:
-#   disableNameSuffixHash: true
-#   labels:
-#     generated: "true"
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    generated: "true"
 
 resources:
 - deployment.yml
 - service.yml
+
+
+
+
+
+# configMapGenerator:
+#   - name: mysql-config
+#     literals:
+#       - MYSQL_ROOT_PASSWORD=admin
+#       - MYSQL_DATABASE=wordpress

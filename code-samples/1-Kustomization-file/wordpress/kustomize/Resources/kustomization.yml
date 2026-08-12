@@ -8,4 +8,4 @@ namePrefix: techtalk-resources-
 
 resources:
 - mysql
-- https://github.com/aloizio-hub/kustomize-lab/tree/main/code-samples/3-the-kfile/wordpress/kustomize/base
+- https://github.com/aloizio-hub/kustomize-lab/tree/main/code-samples/1-Kustomization-file/wordpress/kustomize/base

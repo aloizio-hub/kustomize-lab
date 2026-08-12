@@ -8,4 +8,12 @@ namePrefix: techtalk-resources-
 
 resources:
 - mysql
-- https://github.com/aloizio-hub/kustomize-lab/tree/main/code-samples/1-Kustomization-file/wordpress/kustomize/base
+- github.com/aloizio-hub/kustomize-lab//code-samples/1-Kustomization-file/wordpress/kustomize/base?ref=main
+
+
+# Kustomize implementa seu próprio parser de URLs Git inspirado no go-getter do HashiCorp, suportando um subconjunto de parâmetros: `ref`, `timeout` e `submodules`.
+# O go-getter é a biblioteca da HashiCorp (usada pelo Terraform e pelo Nomad) que baixa arquivos e diretórios a partir de uma única string. O Kustomize adotou esse formato de URL
+# para resources remotos.
+
+#DOC
+#https://github.com/hashicorp/go-getter#url-format

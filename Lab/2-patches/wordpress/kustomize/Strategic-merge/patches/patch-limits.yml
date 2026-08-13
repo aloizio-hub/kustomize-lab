@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql 
+spec:
+  template:
+    spec:
+      containers:
+        - name: mysql
+          resources:
+            #$patch: delete         
+            requests:
+              memory: "200Mi"
+              cpu: "100m"
+            limits:
+              memory: "400Mi"
+              cpu: "200m"
+
+
+
+
+
+
+ # ---------------------------------------------------------------------------
+  # Diretiva $patch (Strategic Merge Patch / Kustomize)
+  # Altera o comportamento de merge no nível em que é declarada:
+  #
+  #   $patch: delete   -> remove o campo (ou o item da lista, casado pela
+  #                       merge key: name em containers/env/volumes,
+  #                       containerPort em ports)
+  #   $patch: replace  -> substitui o bloco inteiro em vez de mesclar
+  #                       (o que não for declarado aqui deixa de existir)
+  #   $patch: merge    -> comportamento padrão, explicitado
+  #
+  # Relacionadas:
+  #   $retainKeys: [..]        -> mescla e descarta as chaves não listadas
+  #   $setElementOrder/<campo> -> define a ordem final da lista mesclada
+  #
+  # Só vale para patches strategic merge (em JSON Patch use "op: remove").
+  # Mantenha apiVersion/kind/metadata.name para o patch casar com o alvo.
+  #
+  # Aqui: descomentar $patch: delete remove todo o bloco resources do
+  # container (os requests/limits abaixo passam a ser ignorados).
+  # ---------------------------------------------------------------------------

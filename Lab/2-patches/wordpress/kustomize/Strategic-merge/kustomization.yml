@@ -1,0 +1,72 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+- pairs:
+    version: techtalk-patches-merge
+  includeTemplates: true
+
+
+namePrefix: techtalk-patches-merge-
+namespace: techtalk-patches-merge
+
+# patchesStrategicMerge: #forma antiga e deprecada de declarar o mesmo arquivo
+#   - patches/patch-limits.yml
+
+patches:
+- path: patches/patch-limits.yml # patch file
+  target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: mysql
+    labelSelector: "app=mysql"
+    annotationSelector: "annotated-by=kustomize"
+
+# - patch: |- #inline patching
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     metadata:
+#       name: mysql 
+#     spec:
+#       template:
+#         spec:
+#           containers:
+#             - name: mysql
+#               resources:
+#                 requests:
+#                   memory: "200Mi"
+#                   cpu: "200m"
+#                 limits:
+#                   memory: "500Mi"
+#                   cpu: "500m"
+#   target:
+#       group: apps
+#       version: v1
+#       kind: Deployment
+#       name: mysql
+#       labelSelector: "app=mysql"
+#       annotationSelector: "annotated-by=kustomize"
+
+resources:
+- mysql
+- ../base
+- namespace.yml
+
+
+# Desde o kustomize v4 os dois foram unificados em patches, que detecta o tipo automaticamente pelo conteúdo: se começa com uma lista de operações op:, é JSON 6902; se é um fragmento
+  # de manifesto, é strategic merge. PatchesStrategicMerge ainda funciona no v5.8.1, mas emite depreciação — use patches em código novo.
+  
+  # Resumo
+  
+  # ┌──────────┬─────────────────────────────────────────────────────────┐
+  # │          │ o que é                                                 │
+  # ├──────────┼─────────────────────────────────────────────────────────┤
+  # │ patches: │ campo do kustomization, lista de patches a aplicar      │
+  # ├──────────┼─────────────────────────────────────────────────────────┤
+  # │ path:    │ aponta para um arquivo com o patch                      │
+  # ├──────────┼─────────────────────────────────────────────────────────┤
+  # │ patch:   │ o patch escrito inline, na própria kustomization        │
+  # ├──────────┼─────────────────────────────────────────────────────────┤
+  # │ target:  │ seletor opcional do alvo (kind, name, labelSelector...) │
+  # └──────────┴─────────────────────────────────────────────────────────┘

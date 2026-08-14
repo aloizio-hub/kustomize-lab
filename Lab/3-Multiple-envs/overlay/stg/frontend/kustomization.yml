@@ -6,6 +6,5 @@ configMapGenerator:
     envs:
       - env.properties
 
-
 resources:
   - "../../../base/frontend"
